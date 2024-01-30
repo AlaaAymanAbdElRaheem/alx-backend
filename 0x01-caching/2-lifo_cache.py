@@ -9,7 +9,7 @@ class LIFOCache(BaseCaching):
     def __init__(self):
         super().__init__()
         self.queue = []
-        
+
     def put(self, key, item):
         """method that puts a new item in the cache"""
         if key and item:
@@ -27,7 +27,7 @@ class LIFOCache(BaseCaching):
                 print("DISCARD: {}".format(discard))
                 self.cache_data[key] = item
                 self.queue.append(key)
-                
+
     def get(self, key):
         """method that retrieves the item from the cache"""
         if key and key in self.cache_data:

@@ -15,7 +15,6 @@ class FIFOCache(BaseCaching):
         if key and item:
             if key in self.cache_data:
                 self.cache_data[key] = item
-                self.queue.append(key)
                 return
             if len(self.cache_data) < BaseCaching.MAX_ITEMS:
                 self.cache_data[key] = item
@@ -26,3 +25,9 @@ class FIFOCache(BaseCaching):
                 print("DISCARD: {}".format(discard))
                 self.cache_data[key] = item
                 self.queue.append(key)
+
+    def get(self, key):
+        """method that retrieves the item from the cache"""
+        if key and key in self.cache_data:
+            return self.cache_data[key]
+        return None

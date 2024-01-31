@@ -31,5 +31,7 @@ class LRUCache(BaseCaching):
     def get(self, key):
         """method that retrieves the item from the cache"""
         if key and key in self.cache_data:
+            self.queue.remove(key)
+            self.queue.append(key)
             return self.cache_data[key]
         return None

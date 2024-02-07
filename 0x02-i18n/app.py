@@ -28,7 +28,7 @@ users = {
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """get locale"""
     local = request.args.get('locale')
     if local and local in app.config['LANGUAGES']:
@@ -41,7 +41,7 @@ def get_locale():
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> pytz.timezone:
     """get timezone"""
     if request.args.get('timezone'):
         try:
@@ -58,7 +58,7 @@ def get_timezone():
     return pytz.timezone(app.config['BABEL_DEFAULT_TIMEZONE'])
 
 
-def get_user():
+def get_user() -> dict:
     """get user"""
     try:
         return users[int(request.args.get('login_as'))]
@@ -67,7 +67,7 @@ def get_user():
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     """before request"""
     user = get_user()
     if user:
@@ -77,7 +77,7 @@ def before_request():
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """index page"""
     username = g.user.get('name') if g.user else None
     date_time = datetime.datetime.now(get_timezone())
